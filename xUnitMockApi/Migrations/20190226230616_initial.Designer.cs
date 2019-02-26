@@ -9,7 +9,7 @@ using xUnitMockApi.Models;
 namespace xUnitMockApi.Migrations
 {
     [DbContext(typeof(MockContext))]
-    [Migration("20190222063155_initial")]
+    [Migration("20190226230616_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,8 +56,6 @@ namespace xUnitMockApi.Migrations
 
                     b.Property<int>("EngineId");
 
-                    b.Property<int>("Id");
-
                     b.HasKey("VehicleId", "EngineId");
 
                     b.HasIndex("EngineId");
@@ -70,13 +68,19 @@ namespace xUnitMockApi.Migrations
 
             modelBuilder.Entity("xUnitMockApi.Models.VehicleWheel", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("VehicleId");
 
                     b.Property<int>("WheelId");
 
-                    b.Property<int>("Id");
+                    b.HasKey("Id", "VehicleId", "WheelId");
 
-                    b.HasKey("VehicleId", "WheelId");
+                    b.HasAlternateKey("Id");
+
+                    b.HasIndex("VehicleId");
 
                     b.HasIndex("WheelId");
 

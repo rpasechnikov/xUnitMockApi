@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using xUnitMockApi.Models;
+using xUnitMockApi.Services;
+using xUnitMockApi.Services.Interfaces;
 
 namespace xUnitMockApi
 {
@@ -15,6 +17,10 @@ namespace xUnitMockApi
         {
             string connection = $"Server=(localdb)\\mssqllocaldb;Database=xUnitMockApi;";
             services.AddDbContext<MockContext>(options => options.UseSqlServer(connection));
+
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IEngineService, EngineService>();
+            services.AddScoped<IWheelService, WheelService>();
 
             services
                 .AddMvc()

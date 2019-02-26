@@ -28,7 +28,7 @@ namespace xUnitMockApi.Models
                 .HasOne(x => x.Vehicle)
                 .WithOne(x => x.Engine);
 
-            modelBuilder.Entity<VehicleWheel>().HasKey(x => new { x.VehicleId, x.WheelId });
+            modelBuilder.Entity<VehicleWheel>().HasKey(x => new { x.Id, x.VehicleId, x.WheelId });
             modelBuilder.Entity<VehicleWheel>()
                 .HasOne(x => x.Vehicle)
                 .WithMany(x => x.Wheels)

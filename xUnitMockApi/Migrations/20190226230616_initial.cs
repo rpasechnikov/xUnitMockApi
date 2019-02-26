@@ -54,8 +54,7 @@ namespace xUnitMockApi.Migrations
                 columns: table => new
                 {
                     VehicleId = table.Column<int>(nullable: false),
-                    EngineId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
+                    EngineId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,13 +77,15 @@ namespace xUnitMockApi.Migrations
                 name: "VehicleWheels",
                 columns: table => new
                 {
-                    VehicleId = table.Column<int>(nullable: false),
-                    WheelId = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    VehicleId = table.Column<int>(nullable: false),
+                    WheelId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VehicleWheels", x => new { x.VehicleId, x.WheelId });
+                    table.PrimaryKey("PK_VehicleWheels", x => new { x.Id, x.VehicleId, x.WheelId });
+                    table.UniqueConstraint("AK_VehicleWheels_Id", x => x.Id);
                     table.ForeignKey(
                         name: "FK_VehicleWheels_Vehicles_VehicleId",
                         column: x => x.VehicleId,
@@ -109,6 +110,11 @@ namespace xUnitMockApi.Migrations
                 table: "VehicleEngines",
                 column: "VehicleId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VehicleWheels_VehicleId",
+                table: "VehicleWheels",
+                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VehicleWheels_WheelId",

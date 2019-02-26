@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using xUnitMockApi.Models;
+using xUnitMockApi.Services.Interfaces;
 using xUnitMockApi.ViewModels;
 
 namespace xUnitMockApi.Controllers
@@ -11,45 +12,29 @@ namespace xUnitMockApi.Controllers
     public class EnginesController : ControllerBase
     {
         private readonly MockContext context;
+        private readonly IEngineService engineService;
 
-        public EnginesController(MockContext context)
+        public EnginesController(MockContext context, IEngineService engineService)
         {
             this.context = context;
+            this.engineService = engineService;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            try
-            {
-                // TODO: VMs
-                return Ok(context.Engines);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            return Ok(engineService.GetEngines());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]EngineViewModel vehicleViewModel)
+        public async Task<IActionResult> Post([FromBody]EngineViewModel engineViewModel)
         {
-            try
+            if (!await engineService.CreateNewEngine(engineViewModel))
             {
-                await context.Engines.AddAsync(new Engine
-                {
-                    Configuration = vehicleViewModel.Configuration,
-                    FuelType = vehicleViewModel.FuelType,
-                    Capacity = vehicleViewModel.Capacity
-                });
+                return BadRequest($"Unable to create engine for: {JsonConvert.SerializeObject(engineViewModel)}");
+            }
 
-                await context.SaveChangesAsync();
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
+            return NoContent();
         }
     }
 }
