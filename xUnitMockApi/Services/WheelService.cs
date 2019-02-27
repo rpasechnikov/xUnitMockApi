@@ -38,8 +38,8 @@ namespace xUnitMockApi.Services
             {
                 var wheel = new Wheel
                 {
-                    Size = 16,
-                    Width = 5
+                    Size = wheelVm.Size,
+                    Width = wheelVm.Width
                 };
 
                 await context.Wheels.AddAsync(wheel);

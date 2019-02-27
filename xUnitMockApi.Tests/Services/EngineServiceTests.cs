@@ -77,9 +77,10 @@ namespace xUnitMockApi.Tests.Services
                     FuelType = "Petrol"
                 };
 
-                var results = await service.CreateNewEngine(engineVm);
+                var isCreateSuccess = await service.CreateNewEngine(engineVm);
                 var engine = context.Engines.First();
 
+                Assert.True(isCreateSuccess);
                 Assert.Single(context.Engines);
 
                 Assert.Equal(engineVm.Capacity, engine.Capacity);
@@ -105,11 +106,12 @@ namespace xUnitMockApi.Tests.Services
                     FuelType = "Petrol"
                 };
 
-                var results = service.CreateNewEngine(engineVm);
+                var isCreateSuccess = await service.CreateNewEngine(engineVm);
                 var engines = context.Engines;
                 var engine1 = engines.First();
                 var engine5 = engines.Last();
 
+                Assert.True(isCreateSuccess);
                 Assert.Equal(5, engines.Count());
 
                 Assert.Equal(2400, engine1.Capacity);
