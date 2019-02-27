@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-using xUnitMockApi.Models;
 using xUnitMockApi.Services.Interfaces;
 using xUnitMockApi.ViewModels;
 
@@ -11,12 +10,10 @@ namespace xUnitMockApi.Controllers
     [ApiController]
     public class EnginesController : ControllerBase
     {
-        private readonly MockContext context;
         private readonly IEngineService engineService;
 
-        public EnginesController(MockContext context, IEngineService engineService)
+        public EnginesController(IEngineService engineService)
         {
-            this.context = context;
             this.engineService = engineService;
         }
 
