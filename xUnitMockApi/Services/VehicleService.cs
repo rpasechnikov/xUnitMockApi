@@ -39,50 +39,54 @@ namespace xUnitMockApi.Services
         {
             try
             {
-                var vehicle = new Vehicle
+                using (var transaction = await context.Database.BeginTransactionAsync())
                 {
-                    Name = vehicleVm.Name
-                };
-
-                // Verify that there are no vehicles by that name already in the DB
-                if (context.Vehicles.Any(x => string.Equals(x.Name, vehicleVm.Name, StringComparison.OrdinalIgnoreCase)))
-                {
-                    // Cannot create duplicate vehicles
-                    return false;
-                }
-
-                await context.Vehicles.AddAsync(vehicle);
-                await context.SaveChangesAsync();
-                
-                if (vehicleVm.EngineId.HasValue)
-                {
-                    await context.VehicleEngines.AddAsync(new VehicleEngine
+                    var vehicle = new Vehicle
                     {
-                        VehicleId = vehicle.Id,
-                        EngineId = vehicleVm.EngineId.Value
-                    });
+                        Name = vehicleVm.Name
+                    };
 
-                    await context.SaveChangesAsync();
-                }
-
-                if (vehicleVm.WheelId.HasValue)
-                {
-                    // Assumed 4 wheels
-                    for (var i = 0; i < 4; i++)
+                    // Verify that there are no vehicles by that name already in the DB
+                    if (context.Vehicles.Any(x => string.Equals(x.Name, vehicleVm.Name, StringComparison.OrdinalIgnoreCase)))
                     {
-                        await context.VehicleWheels.AddAsync(new VehicleWheel
-                        {
-                            VehicleId = vehicle.Id,
-                            WheelId = vehicleVm.WheelId.Value
-                        });
+                        // Cannot create duplicate vehicles
+                        return false;
                     }
 
+                    await context.Vehicles.AddAsync(vehicle);
                     await context.SaveChangesAsync();
-                }
 
-                return true;
+                    if (vehicleVm.EngineId.HasValue)
+                    {
+                        await context.VehicleEngines.AddAsync(new VehicleEngine
+                        {
+                            VehicleId = vehicle.Id,
+                            EngineId = vehicleVm.EngineId.Value
+                        });
+
+                        await context.SaveChangesAsync();
+                    }
+
+                    if (vehicleVm.WheelId.HasValue)
+                    {
+                        // Assumed 4 wheels
+                        for (var i = 0; i < 4; i++)
+                        {
+                            await context.VehicleWheels.AddAsync(new VehicleWheel
+                            {
+                                VehicleId = vehicle.Id,
+                                WheelId = vehicleVm.WheelId.Value
+                            });
+                        }
+
+                        await context.SaveChangesAsync();
+                    }
+
+                    transaction.Commit();
+                    return true;
+                }
             }
-            catch
+            catch (Exception ex)
             {
                 // TODO: handle ex
                 return false;
