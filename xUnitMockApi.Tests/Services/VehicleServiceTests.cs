@@ -110,6 +110,7 @@ namespace xUnitMockApi.UnitTests.Services
                 Assert.True(isCreateSuccess);
                 Assert.Equal(5, vehicles.Count());
 
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 // At this point vehicle1.Wheels and vehicle1.Engine are null. 
                 // Inspecting the context.VehicleWheels and context.VehicleEngines verifies that these 
                 // actually exist and then inspecting vehicle1.Wheels and vehicle1.Engine are no longer null
@@ -118,6 +119,7 @@ namespace xUnitMockApi.UnitTests.Services
                 // 
                 // HACK: evaluating vehicleWheels and vehicleEngines manually results in these properties not being null as well
                 // Is this expected? Unit test passes/succeeds based on context inspection, etc. Changes not propogating correctly...
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 //var wheels = context.VehicleWheels.ToArray();
                 //var engines = context.VehicleEngines.ToArray();
                 Assert.Equal("Subaru Impreza", vehicle1.Name);
