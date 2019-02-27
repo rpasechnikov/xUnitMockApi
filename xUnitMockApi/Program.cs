@@ -17,15 +17,8 @@ namespace xUnitMockApi
             {
                 var services = scope.ServiceProvider;
 
-                try
-                {
-                    var context = scope.ServiceProvider.GetService<MockContext>();
-                    context.Database.Migrate();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Failed to migrate");
-                }
+                var context = scope.ServiceProvider.GetService<MockContext>();
+                context.Database.Migrate();
             }
 
             CreateWebHostBuilder(args).Build().Run();

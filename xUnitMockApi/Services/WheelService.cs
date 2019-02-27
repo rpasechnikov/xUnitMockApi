@@ -47,7 +47,7 @@ namespace xUnitMockApi.Services
                 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 // TODO: handle ex
                 return false;

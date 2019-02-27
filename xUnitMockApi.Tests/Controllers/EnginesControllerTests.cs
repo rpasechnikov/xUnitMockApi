@@ -6,7 +6,7 @@ using xUnitMockApi.Controllers;
 using xUnitMockApi.Services.Interfaces;
 using xUnitMockApi.ViewModels;
 
-namespace xUnitMockApi.Tests.Controllers
+namespace xUnitMockApi.UnitTests.Controllers
 {
     public class EnginesControllerTests
     {

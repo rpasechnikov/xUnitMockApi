@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitMockApi", "xUnitMockApi\xUnitMockApi.csproj", "{41AC6A98-B7C0-4D6D-BB46-B651CE489469}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitMockApi.Tests", "xUnitMockApi.Tests\xUnitMockApi.Tests.csproj", "{FD8EE872-FA6E-40F9-9587-F23DA2C78F6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitMockApi.UnitTests", "xUnitMockApi.Tests\xUnitMockApi.UnitTests.csproj", "{FD8EE872-FA6E-40F9-9587-F23DA2C78F6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitMockApi.IntegrationTests", "xUnitMockApi.IntegrationTests\xUnitMockApi.IntegrationTests.csproj", "{8A2E6C36-ED38-4CE0-9F64-E121560BC2DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FD8EE872-FA6E-40F9-9587-F23DA2C78F6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD8EE872-FA6E-40F9-9587-F23DA2C78F6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD8EE872-FA6E-40F9-9587-F23DA2C78F6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2E6C36-ED38-4CE0-9F64-E121560BC2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2E6C36-ED38-4CE0-9F64-E121560BC2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2E6C36-ED38-4CE0-9F64-E121560BC2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2E6C36-ED38-4CE0-9F64-E121560BC2DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

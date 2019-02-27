@@ -8,7 +8,7 @@ using xUnitMockApi.Models;
 using xUnitMockApi.Services;
 using xUnitMockApi.ViewModels;
 
-namespace xUnitMockApi.Tests.Services
+namespace xUnitMockApi.UnitTests.Services
 {
     public class WheelsServiceTests
     {

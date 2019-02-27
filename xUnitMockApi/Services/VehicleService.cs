@@ -44,6 +44,13 @@ namespace xUnitMockApi.Services
                     Name = vehicleVm.Name
                 };
 
+                // Verify that there are no vehicles by that name already in the DB
+                if (context.Vehicles.Any(x => string.Equals(x.Name, vehicleVm.Name, StringComparison.OrdinalIgnoreCase)))
+                {
+                    // Cannot create duplicate vehicles
+                    return false;
+                }
+
                 await context.Vehicles.AddAsync(vehicle);
                 await context.SaveChangesAsync();
                 
@@ -75,7 +82,7 @@ namespace xUnitMockApi.Services
 
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 // TODO: handle ex
                 return false;
